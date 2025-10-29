@@ -78,11 +78,11 @@ a {
 
 .btn-group {
     text-align: center;
-    margin-top: 16px;
 }
 
 .btn-wrapper {
     display: inline-block;
+    margin-top: 8px;
     margin-right: 24px;
     vertical-align: top;
 }
