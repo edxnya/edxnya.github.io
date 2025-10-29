@@ -79,7 +79,11 @@ a {
 .btn-group {
     display: flex;
     gap: 24px; 
+    align-items: center;
     justify-content: center;
+
+    flex-direction: row; 
+    flex-wrap: nowrap;
 }
 
 .btn-wrapper {
@@ -90,8 +94,10 @@ a {
 
 .url-button {
     width: 56px;
-    height: 56px; 
-    border-radius: 16px; 
+    height: 56px;
+    min-width: 56px;
+    min:height: 56px;
+    border-radius: 16px;
 
     display: flex;
     justify-content: center;
