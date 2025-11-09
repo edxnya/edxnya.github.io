@@ -183,12 +183,16 @@ ul {
 }
 
 .uto-content {
+    width: 100%;
+    height: auto;
     max-width: 540px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .uto-img {
+    width: 100%;
+    height: auto;
     max-width: 540px;
     margin-left: auto;
     margin-right: auto;
