@@ -50,7 +50,8 @@ ul {
 }
 
 .header-content {
-    padding: 42px 16px 32px 16px;
+    padding-top: 42px;
+    padding-bottom: 32px;
     width: 100%;
     max-width: 600px;
     margin-left: auto;
@@ -139,7 +140,8 @@ ul {
 }
 
 .cover-content {
-    padding: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     width: 100%;
     max-width: 600px;
     margin-left: auto;
@@ -202,7 +204,7 @@ ul {
     margin-right: auto;
     margin-top: 4px;
     margin-bottom: 28px;
-    border-radius: 28px;
+    border-radius: 16px;
     object-fit: cover;
 }
 
@@ -212,7 +214,7 @@ ul {
 }
 
 .main-content {
-    padding: 0 16px 64px 16px;
+    padding-bottom: 64px;
     width: 100%;
     max-width: 600px;
     margin-left: auto;
