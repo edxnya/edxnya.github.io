@@ -50,8 +50,8 @@ ul {
 }
 
 .header-content {
-    padding-top: 42px;
-    padding-bottom: 32px;
+    padding: 42px 16px 32px 16px;
+    box-sizing: border-box;
     width: 100%;
     max-width: 600px;
     margin-left: auto;
@@ -140,8 +140,8 @@ ul {
 }
 
 .cover-content {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding: 24px;
+    box-sizing: border-box;
     width: 100%;
     max-width: 600px;
     margin-left: auto;
@@ -194,6 +194,7 @@ ul {
     max-width: 540px;
     margin-left: auto;
     margin-right: auto;
+    box-sizing: border-box;
 }
 
 .uto-img {
@@ -204,7 +205,7 @@ ul {
     margin-right: auto;
     margin-top: 4px;
     margin-bottom: 28px;
-    border-radius: 16px;
+    border-radius: 28px;
     object-fit: cover;
 }
 
@@ -214,7 +215,8 @@ ul {
 }
 
 .main-content {
-    padding-bottom: 64px;
+    padding: 0 16px 64px 16px;
+    box-sizing: border-box;
     width: 100%;
     max-width: 600px;
     margin-left: auto;
