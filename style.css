@@ -46,7 +46,6 @@ ul {
 
 .header-bg {
     background-color: #033e8c;
-    box-shadow: 0 4px 6px 4px #acacac;
 }
 
 .header-content {
@@ -158,22 +157,56 @@ ul {
 .cover-content h1 {
     font-family: 'Hankc';
     font-weight: 400;
-    font-size: 24px;
+    font-size: 22px;
     text-align: center;
     margin: 0 auto;
     width: 100%;
     max-width: 800px;
     color: #033e8c;
-    letter-spacing: 10px;
+    letter-spacing: 8px;
     text-indent: 10px;
     padding-top: 32px;
     padding-bottom: 44px;
+}
+
+.cover-content h2 {
+    color: #033e8c;
+    font-family: 'Hankc';
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    line-height: 28px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    text-indent: 10px;
+}
+
+.cover-content h3 {
+    font-family: 'Hankc';
+    font-weight: 400;
+    font-size: 12px;
+    text-align: right;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    color: #033e8c;
+    text-indent: 10px;
+    padding-top: 8px;
 }
 
 .cover-p {
     margin: 0 auto;
     width: 100%;
     max-width: 512px;
+}
+
+.cover-h {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 512px;
+    padding-top: 32px;
+    padding-bottom: 48px;
 }
 
 .cover-content p {
@@ -194,6 +227,7 @@ ul {
     max-width: 540px;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 16px;
     box-sizing: border-box;
 }
 
@@ -201,11 +235,8 @@ ul {
     width: 100%;
     height: auto;
     max-width: 540px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4px;
-    margin-bottom: 28px;
-    border-radius: 28px;
+    margin: 0 auto;
+    border-radius: 20px;
     object-fit: cover;
 }
 
@@ -215,7 +246,7 @@ ul {
 }
 
 .main-content {
-    padding: 0 16px 64px 16px;
+    padding: 0 16px 32px 16px;
     box-sizing: border-box;
     width: 100%;
     max-width: 600px;
@@ -231,11 +262,26 @@ ul {
     border-bottom: 1px dashed #2b2b2b;
 }
 
+.main-content h2 {
+    font-family: 'BareunDotum';
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    color: #033e8c;
+    letter-spacing: 10px;
+    text-indent: 10px;
+    padding-top: 40px;
+    padding-bottom: 44px;
+}
+
 .main-content h3 {
     font-family: 'BareunDotum';
     font-weight: 700;
     font-size: 18px;
-    margin-top: 32px;
+    margin-top: 40px;
     margin-bottom: 12px;
     color: #033e8c;
 }
@@ -320,31 +366,31 @@ ul {
     color: #acacac !important;
     margin-left: 4px !important;
     word-spacing: -2px !important;
-    letter-spacing: -0.75px !important;
+    letter-spacing: -0.5px !important;
 }
 
 .sublight-header {
     font-family: 'BareunDotum';
     font-weight: 400;
     font-size: 30px;
-    color: #acacac !important;
+    color: #bdbdbd !important;
     margin-left: 4px;
     letter-spacing: 0 !important;
     word-break: keep-all;
 }
 
-.nabi-gradient {
+.umi-gradient {
     background: linear-gradient(30deg, #04b2d9 20%, #033e8c 100%);
     color: transparent;
     -webkit-background-clip: text;
 
     font-family: 'Hankc';
     font-weight: 400;
-    font-size: 24px;
+    font-size: 22px;
     text-align: center;
     padding: 16px 0 32px 0;
     margin: 0 auto;
-    letter-spacing: 10px;
+    letter-spacing: 8px;
 }
 
 .move-left {
