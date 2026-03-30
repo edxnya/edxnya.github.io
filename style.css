@@ -139,7 +139,7 @@ ul {
 }
 
 .cover-content {
-    padding: 24px;
+    padding: 16px;
     box-sizing: border-box;
     width: 100%;
     max-width: 600px;
@@ -235,7 +235,6 @@ ul {
     height: auto;
     max-width: 540px;
     margin: 0 auto;
-    border-radius: 20px;
     object-fit: cover;
 }
 
