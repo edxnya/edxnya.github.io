@@ -204,7 +204,6 @@ ul {
 .cover-h {
     margin: 0 auto;
     width: 100%;
-    max-width: 512px;
     padding-top: 32px;
     padding-bottom: 48px;
 }
