@@ -45,16 +45,26 @@ ul {
 }
 
 .header-bg {
-    background-color: #033e8c;
+    background-color: #033e8c; 
 }
 
-.header-content {
+.header-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 42px 16px 32px 16px;
     box-sizing: border-box;
     width: 100%;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+}
+
+.header-content {
+    flex: 0 1 600px;
+    padding: 8px 16px 32px 8px;
+    box-sizing: border-box;
+    max-width: 600px;
+    margin: 0;
 }
 
 .header-content a {
@@ -78,18 +88,17 @@ ul {
 }
 
 .btn-group {
+    display: flex;
+    gap: 28px;
     text-align: center;
-    padding-top: 18px;
+    padding-top: 48px;
+    margin-right: 64px !important;
 }
 
 .btn-wrapper {
-    display: inline-block;
-    margin-right: 28px;
-    vertical-align: top;
-}
-
-.btn-wrapper:last-child {
-    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .url-button {
@@ -115,11 +124,16 @@ ul {
     color: #f2f2f2;
 }
 
+.url-label a {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
 .url-svg-github {
     position: relative;
     justify-content: center;
     align-items: center;
-    left: 9px;
+    left: 1px;
     top: 2px;
 }
 
@@ -127,15 +141,8 @@ ul {
     position: relative;
     justify-content: center;
     align-items: center;
-    left: 8px;
-    top: 1px;
-}
-
-.url-svg-twitter {
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    left: 9px;
+    left: 1px;
+    top: 2px;
 }
 
 .cover-content {
@@ -284,6 +291,14 @@ ul {
     color: #033e8c;
 }
 
+.header-content h3 {
+    font-family: 'BareunDotum';
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #f2f2f2;
+}
+
 .main-content img {
     vertical-align: middle;
     padding-right: 16px;
@@ -338,15 +353,23 @@ ul {
     margin-left: -8px;
 }
 
+.foot-bg {
+    background-color: #033e8c;
+}
+
 .foot-content {
     margin: 0 auto;
+    margin-top: 16px;
+    padding-top: 40px;
     padding-bottom: 64px;
+    width: 100%;
+    max-width: 600px;
     text-align: center;
-
     font-family: 'BareunDotum';
     font-weight: 300;
     font-size: 11.5px;
-    color: #033e8c;
+    color: #f2f2f2;
+    background-color: #033e8c;
 }
 
 .foot-copyright {
