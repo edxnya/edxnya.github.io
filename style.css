@@ -430,6 +430,13 @@ ul {
     color: #2b2b2b;
 }
 
+.sub-v {
+    font-family: 'BareunDotum';
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    color: #2b2b2b;
+}
+
 .email-spacing {
     letter-spacing: 0.25px;
 }
