@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POMODORUMI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f2f2f2;
+    --panel: #ffffff;
+    --panel-border: #e3e3e6;
+    --ink: #17204b;
+    --ink-muted: #6b6f8a;
+    --ink-faint: #9a9db3;
+    --work: #17204b;
+    --break: #ffb5d6;
+    --accent-pink: #f84b9c;
+    --track: #e6e6ea;
+    --tick: #dcdce1;
+    --focus: #17204b;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0;
+    min-height:100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Sans', 'Noto Sans KR', sans-serif;
+  }
+
+  body{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding: 40px 20px 60px;
+  }
+
+  .page{
+    width:100%;
+    max-width: 460px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 24px;
+  }
+
+  .title{
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    margin: 4px 0 -6px;
+  }
+  .title .accent{ color: var(--accent-pink); }
+
+  .phase-plaque{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .phase-plaque .dot{
+    width:9px; height:9px; border-radius:50%;
+    background: var(--work);
+    transition: background 0.3s ease;
+  }
+  .phase-plaque .phase-name{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .phase-plaque .cycles{
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- dial + controls row ---------- */
+  .dial-row{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 20px;
+  }
+
+  .dial-wrap{
+    position:relative;
+    width: 100%;
+    max-width: 280px;
+    filter: drop-shadow(0 10px 22px rgba(23,32,75,0.12));
+  }
+  #dial{ width:100%; height:auto; display:block; }
+
+  .icon-controls{
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+    flex-shrink:0;
+  }
+
+  .icon-btn{
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+    color: var(--ink);
+    cursor:pointer;
+    transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+    padding:0;
+  }
+  .icon-btn:hover{ border-color: var(--ink-faint); }
+  .icon-btn:active{ transform: scale(0.94); }
+  .icon-btn svg{ width: 22px; height: 22px; display:block; }
+  .icon-btn.primary{ border: none; }
+
+  input:focus-visible,
+  button:focus-visible,
+  .switch:focus-within{
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* ---------- panel ---------- */
+  .panel{
+    width:100%;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 18px;
+    padding: 22px;
+    display:flex;
+    flex-direction:column;
+    gap: 18px;
+  }
+
+  .durations{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .field label{
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .field .input-row{
+    display:flex;
+    align-items:center;
+    background: var(--bg);
+    border: 1.5px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 9px 12px;
+  }
+  .field input[type=number]{
+    width:100%;
+    background:transparent;
+    border:none;
+    color: var(--ink);
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .field input[type=number]:focus{ outline:none; }
+  .field input[type=number]::-webkit-outer-spin-button,
+  .field input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .field input[type=number]{ -moz-appearance: textfield; appearance: textfield; }
+
+  .field .unit{
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .field.work label,
+  .field.work .unit{ color: var(--work); }
+  .field.work .input-row{ border-color: var(--work); }
+
+  .field.break label,
+  .field.break .unit{ color: var(--accent-pink); }
+  .field.break .input-row{ border-color: var(--accent-pink); }
+
+  .divider{
+    height:1px;
+    background: var(--panel-border);
+  }
+
+  .manual-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+  }
+  .manual-row .label-block{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .manual-row .title-sm{
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .manual-row .desc{
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+
+  .switch{
+    position:relative;
+    width: 44px;
+    height: 26px;
+    flex-shrink:0;
+    border-radius: 999px;
+    background: var(--track);
+    border: 1px solid var(--panel-border);
+    cursor:pointer;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+  .switch.is-on{
+    background: var(--work);
+    border-color: var(--work);
+  }
+  .switch input{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    margin:0;
+    cursor:pointer;
+  }
+  .switch .knob{
+    position:absolute;
+    top:2px; left:2px;
+    width:20px; height:20px;
+    border-radius:50%;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    transition: transform 0.18s ease;
+  }
+  .switch input:checked ~ .knob{
+    transform: translateX(18px);
+  }
+
+  @media (max-width: 400px){
+    .dial-row{ gap: 12px; }
+    .dial-wrap{ max-width: 220px; }
+    .icon-btn{ width: 44px; height: 44px; }
+    .icon-btn svg{ width: 19px; height: 19px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="title"><span class="accent">POMODOR</span>UMI</div>
+
+    <div class="phase-plaque">
+      <span class="dot" id="phaseDot"></span>
+      <span class="phase-name" id="phaseName">업무 시간</span>
+      <span class="cycles" id="accumLabel">· 누적 업무 0분</span>
+    </div>
+
+    <div class="dial-row">
+      <div class="dial-wrap">
+        <svg id="dial" viewBox="0 0 400 400">
+          <defs>
+            <clipPath id="pieClip">
+              <path id="clipPath" d=""></path>
+            </clipPath>
+          </defs>
+
+          <g id="ticks" stroke="var(--tick)" stroke-width="2"></g>
+          <circle cx="200" cy="200" r="168" fill="none" stroke="var(--track)" stroke-width="1"></circle>
+          <path id="sector" d="" fill="var(--work)"></path>
+
+          <text id="timeBase" x="200" y="205" text-anchor="middle" dominant-baseline="middle"
+                font-family="'Noto Sans', sans-serif" font-weight="800" font-size="72" fill="var(--work)">25:00</text>
+          <text id="timeOverlay" x="200" y="205" text-anchor="middle" dominant-baseline="middle"
+                font-family="'Noto Sans', sans-serif" font-weight="800" font-size="72" fill="#17204b" clip-path="url(#pieClip)">25:00</text>
+        </svg>
+      </div>
+
+      <div class="icon-controls">
+        <button id="playBtn" class="icon-btn primary" aria-label="시작"></button>
+        <button id="skipBtn" class="icon-btn" aria-label="다음으로 건너뛰기">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5v14l8-7z"/><rect x="16" y="5" width="2.5" height="14"/></svg>
+        </button>
+        <button id="resetBtn" class="icon-btn" aria-label="초기화">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="durations">
+        <div class="field work">
+          <label for="workInput">업무 시간</label>
+          <div class="input-row">
+            <input type="number" id="workInput" min="1" max="90" value="25">
+            <span class="unit">분</span>
+          </div>
+        </div>
+        <div class="field break">
+          <label for="breakInput">쉬는 시간</label>
+          <div class="input-row">
+            <input type="number" id="breakInput" min="1" max="60" value="5">
+            <span class="unit">분</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="manual-row">
+        <div class="label-block">
+          <span class="title-sm">수동 전환</span>
+          <span class="desc">켜두면 시간이 끝나도 자동으로 넘어가지 않고 대기해요</span>
+        </div>
+        <label class="switch" id="switchWrap">
+          <input type="checkbox" id="manualSwitch">
+          <span class="knob"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const cx = 200, cy = 200, r = 168;
+
+  const state = {
+    phase: 'work',
+    workMinutes: 25,
+    breakMinutes: 5,
+    total: 25*60,
+    remaining: 25*60,
+    running: false,
+    manual: false,
+    accumulatedWorkSeconds: 0,
+    lastTick: null,
+    rafId: null,
+  };
+
+  const el = {
+    sector: document.getElementById('sector'),
+    clipPath: document.getElementById('clipPath'),
+    timeBase: document.getElementById('timeBase'),
+    timeOverlay: document.getElementById('timeOverlay'),
+    phaseName: document.getElementById('phaseName'),
+    phaseDot: document.getElementById('phaseDot'),
+    accumLabel: document.getElementById('accumLabel'),
+    playBtn: document.getElementById('playBtn'),
+    skipBtn: document.getElementById('skipBtn'),
+    resetBtn: document.getElementById('resetBtn'),
+    manualSwitch: document.getElementById('manualSwitch'),
+    switchWrap: document.getElementById('switchWrap'),
+    workInput: document.getElementById('workInput'),
+    breakInput: document.getElementById('breakInput'),
+    ticks: document.getElementById('ticks'),
+  };
+
+  const THEME = {
+    work:  { sector: '#17204b', textOutside: '#17204b', textInside: '#ffffff' },
+    break: { sector: '#ffb5d6', textOutside: '#f84b9c', textInside: '#17204b' },
+  };
+
+  const ICONS = {
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>',
+    pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4.5" height="14"/><rect x="13.5" y="5" width="4.5" height="14"/></svg>',
+  };
+
+  (function drawTicks(){
+    const frag = document.createDocumentFragment();
+    for(let i=0;i<12;i++){
+      const angle = (i*30) * Math.PI/180;
+      const outer = r + 12, inner = r + 3;
+      const x1 = cx + inner*Math.cos(angle), y1 = cy + inner*Math.sin(angle);
+      const x2 = cx + outer*Math.cos(angle), y2 = cy + outer*Math.sin(angle);
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+      frag.appendChild(line);
+    }
+    el.ticks.appendChild(frag);
+  })();
+
+  function polar(angleDeg){
+    const rad = angleDeg * Math.PI/180;
+    return { x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad) };
+  }
+
+  function sectorPath(sweepDeg){
+    const clamped = Math.max(0.001, Math.min(359.999, sweepDeg));
+    const startAngle = -90;
+    const endAngle = startAngle + clamped;
+    const start = polar(startAngle);
+    const end = polar(endAngle);
+    const largeArc = clamped > 180 ? 1 : 0;
+    return `M ${cx} ${cy} L ${start.x.toFixed(2)} ${start.y.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${end.x.toFixed(2)} ${end.y.toFixed(2)} Z`;
+  }
+
+  function formatTime(sec){
+    const s = Math.max(0, Math.ceil(sec));
+    const m = Math.floor(s/60);
+    const ss = s % 60;
+    return String(m).padStart(2,'0') + ':' + String(ss).padStart(2,'0');
+  }
+
+  function formatAccumulated(sec){
+    const totalMin = Math.floor(sec/60);
+    const h = Math.floor(totalMin/60);
+    const m = totalMin % 60;
+    return h > 0 ? `${h}시간 ${m}분` : `${m}분`;
+  }
+
+  function render(){
+    const sweep = (state.remaining / state.total) * 360;
+    const d = sectorPath(sweep);
+    el.sector.setAttribute('d', d);
+    el.clipPath.setAttribute('d', d);
+
+    const theme = THEME[state.phase];
+    const isFull = state.remaining >= state.total - 0.01;
+    el.sector.setAttribute('fill', theme.sector);
+    el.timeBase.setAttribute('fill', theme.textOutside);
+    el.timeOverlay.setAttribute('fill', isFull ? '#17204b' : theme.textInside);
+    el.phaseDot.style.background = theme.sector;
+
+    const label = formatTime(state.remaining);
+    el.timeBase.textContent = label;
+    el.timeOverlay.textContent = label;
+
+    el.phaseName.textContent = state.phase === 'work' ? '업무 시간' : '쉬는 시간';
+    el.accumLabel.textContent = `· 누적 업무 ${formatAccumulated(state.accumulatedWorkSeconds)}`;
+
+    el.playBtn.style.background = theme.sector;
+    el.playBtn.style.color = theme.textInside;
+  }
+
+  function updatePlayBtn(){
+    el.playBtn.innerHTML = state.running ? ICONS.pause : ICONS.play;
+    el.playBtn.setAttribute('aria-label', state.running ? '일시정지' : '시작');
+  }
+
+  let audioCtx;
+  function ensureAudio(){
+    if(!audioCtx){
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
+  }
+  function playChime(phase){
+    try{
+      ensureAudio();
+      const t0 = audioCtx.currentTime;
+      const freqs = phase === 'work' ? [660, 880] : [880, 660];
+      freqs.forEach((f, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = f;
+        const start = t0 + i*0.11;
+        gain.gain.setValueAtTime(0, start);
+        gain.gain.linearRampToValueAtTime(0.22, start+0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0008, start+0.16);
+        osc.connect(gain).connect(audioCtx.destination);
+        osc.start(start);
+        osc.stop(start+0.18);
+      });
+    }catch(e){}
+  }
+
+  function advancePhase(){
+    if(state.phase === 'work'){
+      state.phase = 'break';
+      state.total = state.breakMinutes*60;
+    } else {
+      state.phase = 'work';
+      state.total = state.workMinutes*60;
+    }
+    state.remaining = state.total;
+  }
+
+  function onPhaseComplete(){
+    advancePhase();
+    playChime(state.phase);
+    if(state.manual){
+      stopLoop();
+    }
+    render();
+    updatePlayBtn();
+  }
+
+  function skip(){
+    ensureAudio();
+    advancePhase();
+    playChime(state.phase);
+    render();
+  }
+
+  function reset(){
+    if(!window.confirm('정말로 초기화하시겠습니까?')) return;
+    stopLoop();
+    state.total = state.phase === 'work' ? state.workMinutes*60 : state.breakMinutes*60;
+    state.remaining = state.total;
+    render();
+  }
+
+  function loop(ts){
+    if(!state.running) return;
+    if(state.lastTick === null) state.lastTick = ts;
+    const dt = (ts - state.lastTick) / 1000;
+    state.lastTick = ts;
+    state.remaining -= dt;
+    if(state.phase === 'work'){
+      state.accumulatedWorkSeconds += dt;
+    }
+
+    if(state.remaining <= 0){
+      state.remaining = 0;
+      render();
+      onPhaseComplete();
+      if(state.running){
+        state.lastTick = null;
+        state.rafId = requestAnimationFrame(loop);
+      }
+    } else {
+      render();
+      state.rafId = requestAnimationFrame(loop);
+    }
+  }
+
+  function startLoop(){
+    state.running = true;
+    state.lastTick = null;
+    state.rafId = requestAnimationFrame(loop);
+    updatePlayBtn();
+  }
+  function stopLoop(){
+    state.running = false;
+    if(state.rafId) cancelAnimationFrame(state.rafId);
+    updatePlayBtn();
+  }
+
+  el.playBtn.addEventListener('click', () => {
+    ensureAudio();
+    if(state.running) stopLoop(); else startLoop();
+  });
+  el.skipBtn.addEventListener('click', skip);
+  el.resetBtn.addEventListener('click', reset);
+
+  el.manualSwitch.addEventListener('change', () => {
+    state.manual = el.manualSwitch.checked;
+    el.switchWrap.classList.toggle('is-on', state.manual);
+  });
+
+  function clamp(v, min, max){ return Math.min(max, Math.max(min, v)); }
+
+  el.workInput.addEventListener('change', () => {
+    const v = clamp(parseInt(el.workInput.value, 10) || 25, 1, 90);
+    el.workInput.value = v;
+    state.workMinutes = v;
+    if(state.phase === 'work' && !state.running){
+      state.total = v*60;
+      state.remaining = v*60;
+      render();
+    }
+  });
+
+  el.breakInput.addEventListener('change', () => {
+    const v = clamp(parseInt(el.breakInput.value, 10) || 5, 1, 60);
+    el.breakInput.value = v;
+    state.breakMinutes = v;
+    if(state.phase === 'break' && !state.running){
+      state.total = v*60;
+      state.remaining = v*60;
+      render();
+    }
+  });
+
+  render();
+  updatePlayBtn();
+})();
+</script>
+</body>
+</html>

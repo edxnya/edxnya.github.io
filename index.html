@@ -1,141 +1,36 @@
 <!DOCTYPE html>
-
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Edward*</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#033e8c">
+    <link href="http://fonts.googleapis.com/earlyaccess/notosansjp.css">
+    <link href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <div class="header-bg">
-        <div class="header-frame">
-            <div class="header-content">
-                <h1>박유상 <span class="sublight-header">Edwa<span class="spacing-less">r</span>d*</span></h1>
-                <ul class="icon-wlist">
-                    <li><img src="resources/at-sign.svg" class="at-sign-spacing" /><a href="mailto:edxnya@gmail.com"><span class="email-spacing">edxnya@gmail<span class="email-spacing-dot">.</span>com</span></a></li>
-                    <li><img src="resources/navigation.svg" class="loc-spacing" /><span>경기도 고양시</span></li>
-                    <li><img src="resources/globe.svg" /><span>한국어, 日本語, English</span></li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <div class="btn-wrapper">
-                    <button class="url-button">
-                        <a href="https://github.com/edxnya"><img src="resources/github.svg" class="url-svg-github" /></a>
-                    </button>
-                    <div class="url-label"><a href="https://github.com/edxnya"><span>GitHub</span></a></div>
-                </div>
-
-                <div class="btn-wrapper">
-                    <button class="url-button">
-                        <a href="https://www.pixiv.net/users/63936805"><img src="resources/brush.svg" class="url-svg-pixiv" /></a>
-                    </button>
-                    <div class="url-label"><a href="https://www.pixiv.net/users/63936805"><span>Pixiv</span></a></div>
-                </div>
-            </div>
+    <nav class="navbar">
+        <div class="navframe">
+            <a href="./" class="navbtn nbcv" data-page="cv" onclick="navigateTo('cv'); return false;">CV</a>
+            <a href="?page=works" class="navbtn nbworks" data-page="works" onclick="navigateTo('works'); return false;">Works</a>
+            <a href="?page=contact" class="navbtn nbcontact" data-page="contact" onclick="navigateTo('contact'); return false;">Contact</a>
         </div>
-    </div>
-
-    <div class="cover-content">
-        <div class="cover-h">
-            <h2>사람들이 나머지 인류에게 감사를 표하는 방법 중 하나는</h2>
-            <h2>멋진 것을 만들어 세상에 내놓는 것이라고 믿습니다.</h2>
-            <h3>ー 스티브 잡스, 2007년</h3>
-        </div>
-        <div class="cover-p">
-            <p>9살의 저는 꿈이 있었습니다. 그것은 단순히 '컴퓨터 프로그래머'라는 직업이 아니었습니다. 컴퓨터로 할 수 있는 것은 무엇이든 만들어보고 싶다는 창작의 열망이었습니다.</p>
-            <p>"<a href="https://cafe.naver.com/sangbinkids">초딩들의 컴퓨터 도전기</a>"는 그렇게 시작되었습니다. 
-                다양한 툴을 이용하여 만든 창의적인 작품들을 카페에서 공유했습니다. 서로를 격려하며 창작의 보람을 느낄 수 있었던 그 곳은 저희에게는 마치 사이버 놀이터와도 같은 공간이었습니다.</p>
-            <p>어린 시절의 경험은 지금의 저를 만들어 준 귀중한 양분입니다. 창작은 저로 하여금 다른 창작자들과도 닿게 해 주었습니다. 각자만의 개성이 담긴 세계를 들여다보며 많은 즐거움과 배움을 얻고 있습니다.</p>
-        </div>
-    </div>
-
-    <div class="uto-content">
-        <img src="resources/uto.png" class="uto-img"/>
-    </div>
-
-    <div>
-        <div class="main-content">
-
-            <h3>Education</h3>
-            <ul class="icon-blist">
-                <li><img src="resources/chevron-right.svg" /><span><a href="http://aix.hanyang.ac.kr">한양대학교 ERICA 인공지능학과</a> <span class="sublight">(2021. 3. - 2026. 2.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">학부 졸업</span></ul>
-            </ul>
-
-            <h3>Certificates</h3>
-            <ul class="icon-blist">
-                <li><img src="resources/chevron-right.svg" /><span>일본어능력시험(JLPT) N1 <span class="sublight">(2023. 1. 12. 취득)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">2022년도 제2회 시험</span></ul>
-            </ul>
-
-            <h3>Experience</h3>
-            <ul class="icon-blist">
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://parable-asia.com">패러블</a> (<a href="https://comicw.net">코믹월드 SUMMER 2026</a>) </span><span class="sublight">(2026. 7.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">크리에이터 '유키라' 님 팬미팅 운영 보조 스탭</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://x.com/veventmarket">브이이벤트마켓 5<span class="sub-v" style="margin-left: -0.5px;">.</span><span class="sub-v" style="margin-left: -2px;">0</span></a> <span class="sublight">(2026. 6.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">현장 관리 스탭</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://www.pixiv.net/users/39258616">으미(Umi)</a> 작가님 <span class="sublight">(2025. 12.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">서울일러스트레이션페어 V</span><span class="sub-li" style="margin-left: -1px;">.</span><span class="sub-li" style="margin-left: -1px;">20에서 작가 부스 보조</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://www.pixiv.net/users/28145748">나비(Nabi)</a> 작가님 <span class="sublight">(2024. 7.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">코믹월드 SUMMER 2024에서 작가 부스 보조</span></ul>
+        <div class="navlang" id="navlang">
+            <div class="langbtn" onclick="toggleLangMenu(event)"><img src="icons/globe.svg"></div>
+            <ul class="langul">
+                <li><a href="#" onclick="selectLanguage('ko'); return false;">한국어</a></li>
+                <li><a href="#" onclick="selectLanguage('ja'); return false;">日本語</a></li>
+                <li><a href="#" onclick="selectLanguage('en'); return false;">English</a></li>
             </ul>
         </div>
+    </nav>
 
-        <div class="uto-content">
-            <img src="resources/sif.png" class="uto-img"/>
-        </div>
-        
-        <div class="main-content">
-            <h3>Activities</h3>
-            <ul class="icon-blist">
-                <li><img src="resources/chevron-right.svg" /><span>LABis <span class="sublight">(2023. 1. - 2023. 6.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">교육생, 웹 프론트엔드 개발</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://www.8793.io">팔칠구삼</a> <span class="sublight">(2019. 1. - 2019. 10.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">교육생, 안드로이드 앱 개발(Java)</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://cafe.naver.com/sangbinkids">초딩들의 컴퓨터 도전기</a> <span class="sublight">(2009. 7. - 2013. 2.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">네이버 카페 부매니저</span></ul>
-            </ul>
+    <main id="app-content" class="container"></main>
 
-            <h3>Awards</h3>
-            <ul class="icon-blist">
-                <li><img src="resources/chevron-right.svg" /><span>UCPC 2022 <span class="sublight">(2022. 7. 2.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">예선 참가 (박유상, 방제영, 윤정민)</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span>전국 콘텐츠코리아랩 연합 콘텐츠 해커톤 대회 <span class="sublight">(2019. 1. 23. - 1. 25.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">아이디어상(4등상), 집밥 공유 플랫폼 컨셉 아이디어 발표</span></ul>
-            </ul>
-
-            <h3>Projects</h3>
-            <ul class="icon-blist">
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://github.com/edxnya/illustelligence">GLIGEN 및 드로잉 인터페이스를 접목한 창작 보조 도구</a> <span class="sublight">(2025. 6.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">1인 개발, 캡스톤디자인 프로젝트</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://github.com/Kyrie0508/YumeNikki_VR">고전 게임 '유메닛키'의 VR 버전 재해석</a> <span class="sublight">(2025. 6.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">팀 프로젝트, Unity</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://github.com/Software-Engineering-GoldStone/Frontend">보드 게임 '사보타지' 온라인 플레이</a> <span class="sublight">(2025. 6.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">팀 프로젝트, 웹 프론트엔드</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://github.com/edxnya/plant-diary">Temi 로봇을 이용한 식물 관리 시스템</a> <span class="sublight">(2025. 6.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">팀 프로젝트, 웹 프론트엔드 및 Temi 로봇 연동</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://github.com/KTFplus">한국어 학습용 음성인식 솔루션</a> <span class="sublight">(2025. 6.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">팀 프로젝트, 웹 프론트엔드</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://github.com/YouHyeok/Tom">Docusaurus를 이용한 Notion 기반 블로그 포스팅 앱</a> <span class="sublight">(2023. 10.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">2인 개발, iOS 앱 프론트엔드</span></ul>
-                <li><img src="resources/chevron-right.svg" /><span><a href="https://github.com/edxnya/GameMaker">GameMaker 1인 프로젝트 모음</a> <span class="sublight">(2010. - 2012.)</span></span></li>
-                <ul class="sub-ul"><span class="sub-li">1인 개발, GameMaker 8.0</span></ul>
-            </ul>
-        </div>
-        <div class="foot-bg">
-            <div class="foot-content">
-                <span class="foot-copyright">© </span>
-                <span id="current_year">
-                    <script>
-                        date = new Date();
-                        year = date.getFullYear();
-                        document.getElementById("current_year").innerHTML = year;
-                    </script>
-                </span>
-                <span>Edward*</span>
-            </div>
-        </div>
-    </div>
-</body> 
+    <footer class="footer">
+        <p class="footer-text">&copy; 2026 Edward*</p>
+    </footer>
+</body>
 </html>
