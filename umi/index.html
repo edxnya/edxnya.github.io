@@ -354,7 +354,7 @@
     manual: false,
     accumulatedWorkSeconds: 0,
     lastTick: null,
-    rafId: null,
+    intervalId: null,
   };
 
   const el = {
@@ -526,11 +526,16 @@
     render();
   }
 
-  function loop(ts){
+  // setInterval + real wall-clock deltas are used instead of requestAnimationFrame,
+  // because most browsers pause rAF entirely on a hidden/background tab, which would
+  // silently stall the countdown (and the transition sound) until the tab regains focus.
+  // setInterval keeps firing (at most throttled to ~1/sec) even while backgrounded.
+  function tick(){
     if(!state.running) return;
-    if(state.lastTick === null) state.lastTick = ts;
-    const dt = (ts - state.lastTick) / 1000;
-    state.lastTick = ts;
+    const now = performance.now();
+    if(state.lastTick === null) state.lastTick = now;
+    const dt = (now - state.lastTick) / 1000;
+    state.lastTick = now;
     state.remaining -= dt;
     if(state.phase === 'work'){
       state.accumulatedWorkSeconds += dt;
@@ -540,25 +545,20 @@
       state.remaining = 0;
       render();
       onPhaseComplete();
-      if(state.running){
-        state.lastTick = null;
-        state.rafId = requestAnimationFrame(loop);
-      }
     } else {
       render();
-      state.rafId = requestAnimationFrame(loop);
     }
   }
 
   function startLoop(){
     state.running = true;
-    state.lastTick = null;
-    state.rafId = requestAnimationFrame(loop);
+    state.lastTick = performance.now();
+    state.intervalId = setInterval(tick, 100);
     updatePlayBtn();
   }
   function stopLoop(){
     state.running = false;
-    if(state.rafId) cancelAnimationFrame(state.rafId);
+    if(state.intervalId){ clearInterval(state.intervalId); state.intervalId = null; }
     updatePlayBtn();
   }
 
@@ -595,6 +595,12 @@
       state.total = v*60;
       state.remaining = v*60;
       render();
+    }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if(document.visibilityState === 'visible' && audioCtx && audioCtx.state === 'suspended'){
+      audioCtx.resume();
     }
   });
 
