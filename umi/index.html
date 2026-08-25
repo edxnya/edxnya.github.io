@@ -469,20 +469,24 @@
     try{
       ensureAudio();
       const t0 = audioCtx.currentTime;
-      const freqs = phase === 'work' ? [660, 880] : [880, 660];
-      freqs.forEach((f, i) => {
+      const freq = phase === 'work' ? 1046.5 : 784;
+      const beepDur = 0.13;
+      const gap = 0.09;
+      const repeats = 3;
+      for(let i=0;i<repeats;i++){
+        const start = t0 + i*(beepDur+gap);
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.value = f;
-        const start = t0 + i*0.11;
+        osc.type = 'square';
+        osc.frequency.value = freq;
         gain.gain.setValueAtTime(0, start);
-        gain.gain.linearRampToValueAtTime(0.22, start+0.015);
-        gain.gain.exponentialRampToValueAtTime(0.0008, start+0.16);
+        gain.gain.linearRampToValueAtTime(0.28, start+0.008);
+        gain.gain.setValueAtTime(0.28, start+beepDur-0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0006, start+beepDur);
         osc.connect(gain).connect(audioCtx.destination);
         osc.start(start);
-        osc.stop(start+0.18);
-      });
+        osc.stop(start+beepDur+0.01);
+      }
     }catch(e){}
   }
 
