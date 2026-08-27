@@ -480,8 +480,8 @@
         osc.type = 'square';
         osc.frequency.value = freq;
         gain.gain.setValueAtTime(0, start);
-        gain.gain.linearRampToValueAtTime(0.28, start+0.008);
-        gain.gain.setValueAtTime(0.28, start+beepDur-0.025);
+        gain.gain.linearRampToValueAtTime(0.16, start+0.008);
+        gain.gain.setValueAtTime(0.16, start+beepDur-0.025);
         gain.gain.exponentialRampToValueAtTime(0.0006, start+beepDur);
         osc.connect(gain).connect(audioCtx.destination);
         osc.start(start);
